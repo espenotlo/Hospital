@@ -1,3 +1,5 @@
+package hospital;
+
 /**
  * A tag signalling the associated class can be diagnosed by a doctor.
  */

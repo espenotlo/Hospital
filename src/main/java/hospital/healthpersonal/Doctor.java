@@ -1,9 +1,12 @@
+package hospital.healthpersonal;
+import hospital.Patient;
+
 /**
  * An abstraction of a doctor in the hospital.
  * All doctors have a more defined class,
  * but share the traits of this class.
  */
-abstract class Doctor extends Employee{
+abstract class Doctor extends hospital.healthpersonal.Employee {
     /**
      * Creates an object of the Doctor class.
      *

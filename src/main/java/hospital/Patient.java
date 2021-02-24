@@ -1,3 +1,5 @@
+package hospital;
+
 /**
  * A patient in the hospital.
  */

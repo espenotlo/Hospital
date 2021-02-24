@@ -1,9 +1,10 @@
+package hospital.healthpersonal;
 /**
  * An abstraction of an employee in the hospital.
  * All employees have a more defined class,
  * but share the traits of this class.
  */
-public class Employee extends Person{
+public class Employee extends hospital.Person{
 
     /**
      * Creates an object of the Employee class.

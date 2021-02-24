@@ -1,3 +1,6 @@
+package hospital.healthpersonal;
+import hospital.Patient;
+
 /**
  * A surgeon in the hospital.
  */

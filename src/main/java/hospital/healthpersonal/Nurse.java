@@ -1,3 +1,5 @@
+package hospital.healthpersonal;
+
 /**
  * A nurse in the hospital.
  */

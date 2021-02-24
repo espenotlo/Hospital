@@ -1,7 +1,10 @@
+package hospital.healthpersonal;
+import hospital.Patient;
+
 /**
  * A General practitioner working with the hospital.
  */
-public class GeneralPractitioner extends Doctor {
+public class GeneralPractitioner extends hospital.healthpersonal.Doctor {
 
     /**
      * Creates an object of the GeneralPractitioner class.
