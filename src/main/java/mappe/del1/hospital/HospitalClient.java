@@ -10,7 +10,7 @@ public class HospitalClient {
         final Hospital hospital = new Hospital("NTNU Sentralsykehus");
         HospitalTestData.fillRegisterWithTestData(hospital);
 
-        JFrame frame = new JFrame("Espen's Food Planner");
+        JFrame frame = new JFrame("Hospital");
         frame.setSize(800,600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
