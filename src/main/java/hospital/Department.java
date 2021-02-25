@@ -1,6 +1,5 @@
 package hospital;
 
-import com.sun.jdi.Value;
 import hospital.healthpersonal.Employee;
 
 import java.util.ArrayList;
@@ -9,11 +8,13 @@ import java.util.List;
 
 public class Department {
     private String departmentName;
-    private HashMap<String, Employee> employees;
-    private HashMap<String, Patient> patients;
+    private final HashMap<String, Employee> employees;
+    private final HashMap<String, Patient> patients;
 
     public Department(String departmentName) {
         setDepartmentName(departmentName);
+        this.employees = new HashMap<>();
+        this.patients = new HashMap<>();
     }
 
     public void setDepartmentName(String departmentName) {
@@ -51,10 +52,6 @@ public class Department {
     public void remove(Person person) {
         try {
             this.employees.remove(person.getSocialSecurityNumber());
-        } catch (Exception RemoveException) {
-            System.out.println(RemoveException.getMessage());
-        }
-        try {
             this.patients.remove(person.getSocialSecurityNumber());
         } catch (Exception RemoveException) {
             System.out.println(RemoveException.getMessage());
