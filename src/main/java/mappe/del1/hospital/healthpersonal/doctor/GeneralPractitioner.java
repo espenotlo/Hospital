@@ -1,10 +1,10 @@
-package hospital.healthpersonal;
-import hospital.Patient;
+package mappe.del1.hospital.healthpersonal.doctor;
+import mappe.del1.hospital.Patient;
 
 /**
  * A General practitioner working with the hospital.
  */
-public class GeneralPractitioner extends hospital.healthpersonal.Doctor {
+public class GeneralPractitioner extends Doctor {
 
     /**
      * Creates an object of the GeneralPractitioner class.
@@ -20,5 +20,10 @@ public class GeneralPractitioner extends hospital.healthpersonal.Doctor {
     @Override
     void setDiagnosis(Patient patient, String diagnosis) {
         patient.setDiagnosis(diagnosis);
+    }
+
+    @Override
+    public String toString() {
+        return "Allmenlege " + super.toString();
     }
 }

@@ -1,12 +1,13 @@
-package hospital.healthpersonal;
-import hospital.Patient;
+package mappe.del1.hospital.healthpersonal.doctor;
+import mappe.del1.hospital.Patient;
+import mappe.del1.hospital.Employee;
 
 /**
  * An abstraction of a doctor in the hospital.
  * All doctors have a more defined class,
  * but share the traits of this class.
  */
-abstract class Doctor extends hospital.healthpersonal.Employee {
+abstract class Doctor extends Employee {
     /**
      * Creates an object of the Doctor class.
      *

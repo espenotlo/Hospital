@@ -1,4 +1,4 @@
-package hospital;
+package mappe.del1.hospital;
 
 /**
  * A patient in the hospital.

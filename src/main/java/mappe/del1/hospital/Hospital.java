@@ -1,4 +1,4 @@
-package hospital;
+package mappe.del1.hospital;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,10 +6,11 @@ import java.util.List;
 
 public class Hospital {
     private final String hospitalName;
-    private HashMap<String, Department> departments;
+    private final HashMap<String, Department> departments;
 
     public Hospital(String hospitalName) {
         this.hospitalName = hospitalName;
+        this.departments = new HashMap<>();
     }
 
     public String getHospitalName() {
@@ -17,7 +18,9 @@ public class Hospital {
     }
 
     public List<Department> getDepartments() {
-        return new ArrayList<Department>(this.departments.values());
+        List<Department> departmentList = new ArrayList<Department>(this.departments.values());
+        departmentList.sort((o1, o2) -> o1.getDepartmentName().compareToIgnoreCase(o2.getDepartmentName()));
+        return departmentList;
     }
 
     public void addDepartment(Department department) {
@@ -27,6 +30,11 @@ public class Hospital {
     }
     @Override
     public String toString() {
-        return this.hospitalName;
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.hospitalName).append("\n\n");
+        for (Department department : getDepartments()) {
+            sb.append(department.toString()).append("\n");
+        }
+        return sb.toString();
     }
 }

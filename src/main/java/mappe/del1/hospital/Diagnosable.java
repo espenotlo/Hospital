@@ -1,4 +1,4 @@
-package hospital;
+package mappe.del1.hospital;
 
 /**
  * A tag signalling the associated class can be diagnosed by a doctor.

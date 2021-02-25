@@ -1,4 +1,4 @@
-package hospital;
+package mappe.del1.hospital;
 
 /**
  * Represents a generic person.
@@ -87,6 +87,6 @@ public abstract class Person {
      */
     @Override
     public String toString() {
-        return (this.socialSecurityNumber +", "+ this.firstName + " " + this.lastName);
+        return (this.firstName + " " + this.lastName + ", personnummer: " + this.socialSecurityNumber);
     }
 }

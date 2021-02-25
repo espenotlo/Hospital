@@ -1,10 +1,13 @@
-package hospital.healthpersonal;
+package mappe.del1.hospital;
+
+import mappe.del1.hospital.Person;
+
 /**
  * An abstraction of an employee in the hospital.
  * All employees have a more defined class,
  * but share the traits of this class.
  */
-public class Employee extends hospital.Person{
+public class Employee extends Person {
 
     /**
      * Creates an object of the Employee class.
@@ -23,6 +26,6 @@ public class Employee extends hospital.Person{
      */
     @Override
     public String toString() {
-        return super.toString();
+        return "Ansatt " + super.toString();
     }
 }

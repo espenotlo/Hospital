@@ -1,10 +1,10 @@
-package hospital.healthpersonal;
-import hospital.Patient;
+package mappe.del1.hospital.healthpersonal.doctor;
+import mappe.del1.hospital.Patient;
 
 /**
  * A surgeon in the hospital.
  */
-public class Surgeon extends Doctor{
+public class Surgeon extends Doctor {
 
     /**
      * Creates an object of the Doctor class.
@@ -20,5 +20,10 @@ public class Surgeon extends Doctor{
     @Override
     public void setDiagnosis(Patient patient, String diagnosis) {
         patient.setDiagnosis(diagnosis);
+    }
+
+    @Override
+    public String toString() {
+        return "Kirurg " + super.toString();
     }
 }

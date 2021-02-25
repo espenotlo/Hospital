@@ -1,6 +1,6 @@
-package hospital;
+package mappe.del1.hospital;
 
-import hospital.healthpersonal.Employee;
+import mappe.del1.hospital.exception.RemoveException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +26,9 @@ public class Department {
     }
 
     public List<Employee> getEmployees() {
-        return new ArrayList<>(this.employees.values());
+        List<Employee> employeeList = new ArrayList<>(this.employees.values());
+        employeeList.sort((o1, o2) -> o1.toString().compareToIgnoreCase(o2.toString()));
+        return employeeList;
     }
 
     public void addEmployee(Employee employee) {
@@ -35,10 +37,12 @@ public class Department {
         }
     }
     public List<Patient> getPatients() {
-        return new ArrayList<>(this.patients.values());
+        List<Patient> patientList = new ArrayList<>(this.patients.values());
+        patientList.sort((o1, o2) -> o1.toString().compareToIgnoreCase(o2.toString()));
+        return patientList;
     }
 
-    public void addEmployee(Patient patient) {
+    public void addPatient(Patient patient) {
         if (!this.patients.containsKey(patient.getSocialSecurityNumber())) {
             this.patients.put(patient.getSocialSecurityNumber(), patient);
         }
@@ -49,17 +53,28 @@ public class Department {
         return 1;
     }
 
-    public void remove(Person person) {
-        try {
-            this.employees.remove(person.getSocialSecurityNumber());
-            this.patients.remove(person.getSocialSecurityNumber());
-        } catch (Exception RemoveException) {
-            System.out.println(RemoveException.getMessage());
-        }
+    public void remove(Person person) throws RemoveException {
+        this.employees.remove(person.getSocialSecurityNumber());
+        this.patients.remove(person.getSocialSecurityNumber());
     }
 
     @Override
     public boolean equals(Object o) {
         return o.getClass() == this.getClass() && o.toString().equals(toString());
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.departmentName).append("\nAnsatte: \n");
+        for (Employee employee : getEmployees()) {
+            sb.append(employee.toString()).append("\n");
+        }
+        sb.append("\nPasienter: \n");
+        for (Patient patient : getPatients()) {
+            sb.append(patient.toString()).append("\n");
+        }
+
+        return sb.toString();
     }
 }

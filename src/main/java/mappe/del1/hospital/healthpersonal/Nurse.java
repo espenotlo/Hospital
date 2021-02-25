@@ -1,4 +1,6 @@
-package hospital.healthpersonal;
+package mappe.del1.hospital.healthpersonal;
+
+import mappe.del1.hospital.Employee;
 
 /**
  * A nurse in the hospital.
@@ -18,6 +20,6 @@ public class Nurse extends Employee {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Sykepleier " + super.toString();
     }
 }
