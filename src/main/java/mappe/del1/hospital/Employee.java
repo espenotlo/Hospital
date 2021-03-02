@@ -26,6 +26,6 @@ public class Employee extends Person {
      */
     @Override
     public String toString() {
-        return "Ansatt " + super.toString();
+        return super.toString();
     }
 }
