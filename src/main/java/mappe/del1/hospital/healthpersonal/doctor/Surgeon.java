@@ -24,6 +24,9 @@ public class Surgeon extends Doctor {
 
     @Override
     public String toString() {
-        return "Kirurg " + super.toString();
+        return "Kirurg: " + super.getFullName() + ", personnummer: "+ super.getSocialSecurityNumber();
+    }
+    public String asString() {
+        return "Kirurg: " + super.getFullName() + ", personnummer: "+ super.getSocialSecurityNumber();
     }
 }

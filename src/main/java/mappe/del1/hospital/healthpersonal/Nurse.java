@@ -20,6 +20,10 @@ public class Nurse extends Employee {
 
     @Override
     public String toString() {
-        return "Sykepleier " + super.toString();
+        return "Sykepleier: " + super.getFullName() + ", personnummer: "+ super.getSocialSecurityNumber();
+    }
+
+    public String asString() {
+        return "Sykepleier: " + super.getFullName() + ", personnummer: "+ super.getSocialSecurityNumber();
     }
 }

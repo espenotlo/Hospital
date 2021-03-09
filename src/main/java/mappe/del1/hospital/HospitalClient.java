@@ -1,5 +1,7 @@
 package mappe.del1.hospital;
 
+import mappe.del1.hospital.exception.RemoveException;
+
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
@@ -30,7 +32,7 @@ public class HospitalClient {
         JTextArea hospitalList= new JTextArea();
         hospitalList.setFocusable(false);
         hospitalList.setEditable(false);
-        hospitalList.setText(hospital.toString());
+        hospitalList.setText(hospital.getAsString());
         JScrollPane hospitalListScroll = new JScrollPane(hospitalList);
         hospitalListScroll.setBounds(420,30,350,500);
         hospitalListScroll.setBorder(BorderFactory.createTitledBorder(new EtchedBorder(),"Sykehuset", 1, 3));
@@ -38,37 +40,37 @@ public class HospitalClient {
         JButton removeEmployeeButton = new JButton ("Fjern ansatt");
         removeEmployeeButton.addActionListener(e -> {
             String socialSecurityNumber = JOptionPane.showInputDialog("Angi personnummeret til den ansatte som skal slettes:");
-            try {
-                for (Department department : hospital.getDepartments()) {
-                    for (Employee employee : department.getEmployees()) {
-                        if (employee.getSocialSecurityNumber().equals(socialSecurityNumber)) {
-                            log.append("Fjernet " + employee.toString() + " fra sykehuset." );
-                            department.remove(employee);
-                            hospitalList.setText(hospital.toString());
-                        }
-                    }
+            boolean success = false;
+            for (Department department : hospital.getDepartments()) {
+                try {
+                    department.remove(new Employee("Fjern", "Meg", socialSecurityNumber));
+                } catch (RemoveException exception) {
+                    log.append(exception.getMessage() + "\n\n");
+                    success = true;
                 }
-            } catch (Exception RemoveException) {
-                log.append("Det finnes ingen ansatt med dette personnummeret på sykehuset.");
             }
+            if (!success) {
+                log.append("Det finnes ingen ansatt med personnummer " + socialSecurityNumber + " i sykehusregisteret.\n\n");
+            }
+            hospitalList.setText(hospital.getAsString());
         });
 
         JButton removePatientButton = new JButton ("Fjern pasient");
         removePatientButton.addActionListener(e -> {
             String socialSecurityNumber = JOptionPane.showInputDialog("Angi personnummeret til pasienten som skal slettes:");
-            try {
-                for (Department department : hospital.getDepartments()) {
-                    for (Patient patient : department.getPatients()) {
-                        if (patient.getSocialSecurityNumber().equals(socialSecurityNumber)) {
-                            log.append("Fjernet " + patient.toString() + " fra sykehuset." );
-                            department.remove(patient);
-                            hospitalList.setText(hospital.toString());
-                        }
-                    }
+            boolean success = false;
+            for (Department department : hospital.getDepartments()) {
+                try {
+                    department.remove(new Patient("Fjern", "Meg", socialSecurityNumber));
+                } catch (RemoveException exception) {
+                    log.append(exception.getMessage() + "\n\n");
+                    success = true;
                 }
-            } catch (Exception RemoveException) {
-                log.append("Det finnes ingen pasient med dette personnummeret på sykehuset.");
             }
+            if (!success) {
+                log.append("Det finnes ingen pasient med personnummer " + socialSecurityNumber + " i sykehusregisteret.\n\n");
+            }
+            hospitalList.setText(hospital.getAsString());
         });
 
         JPanel buttonPanel = new JPanel();

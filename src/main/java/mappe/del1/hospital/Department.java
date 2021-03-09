@@ -5,6 +5,7 @@ import mappe.del1.hospital.exception.RemoveException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A department is a section of the hospital.
@@ -14,8 +15,7 @@ import java.util.List;
  */
 public class Department {
     private String departmentName;
-    private final HashMap<String, Employee> employees;
-    private final HashMap<String, Patient> patients;
+    private final HashMap<String, Person> persons;
 
     /**
      * Creates an object of the department class
@@ -23,8 +23,7 @@ public class Department {
      */
     public Department(String departmentName) {
         setDepartmentName(departmentName);
-        this.employees = new HashMap<>();
-        this.patients = new HashMap<>();
+        this.persons = new HashMap<>();
     }
 
     /**
@@ -44,12 +43,17 @@ public class Department {
     }
 
     /**
-     * Returns a list containing
+     * Returns an alphabetically sorted list of
      * all the employees in the department.
-     * @return {@code List<Employee>} of employees in the department.
+     * @return {@code ArrayList<Employee>} of employees in the department.
      */
     public List<Employee> getEmployees() {
-        List<Employee> employeeList = new ArrayList<>(this.employees.values());
+        List<Employee> employeeList = new ArrayList<>();
+        for (Person person : this.persons.values()) {
+            if (person instanceof Employee) {
+                employeeList.add((Employee) person);
+            }
+        }
         employeeList.sort((o1, o2) -> o1.toString().compareToIgnoreCase(o2.toString()));
         return employeeList;
     }
@@ -59,17 +63,22 @@ public class Department {
      * @param employee the {@code Employee} to be added.
      */
     public void addEmployee(Employee employee) {
-        if (!this.employees.containsKey(employee.getSocialSecurityNumber())) {
-            this.employees.put(employee.getSocialSecurityNumber(), employee);
+        if (!this.persons.containsKey(employee.getSocialSecurityNumber())) {
+            this.persons.put(employee.getSocialSecurityNumber(), employee);
         }
     }
 
     /**
-     * Returns a list of all patients in the department.
-     * @return {@code List<Patient>} of all patients in the department.
+     * Returns an alphabetically sorted list of all patients in the department.
+     * @return {@code ArrayList<Patient>} of all patients in the department.
      */
     public List<Patient> getPatients() {
-        List<Patient> patientList = new ArrayList<>(this.patients.values());
+        List<Patient> patientList = new ArrayList<>();
+        for (Person person : this.persons.values()) {
+            if (person instanceof Patient) {
+                patientList.add((Patient) person);
+            }
+        }
         patientList.sort((o1, o2) -> o1.toString().compareToIgnoreCase(o2.toString()));
         return patientList;
     }
@@ -79,33 +88,37 @@ public class Department {
      * @param patient the {@code Patient} to be added.
      */
     public void addPatient(Patient patient) {
-        if (!this.patients.containsKey(patient.getSocialSecurityNumber())) {
-            this.patients.put(patient.getSocialSecurityNumber(), patient);
+        if (!this.persons.containsKey(patient.getSocialSecurityNumber())) {
+            this.persons.put(patient.getSocialSecurityNumber(), patient);
         }
     }
 
-    /**
-     *
-     * @return
-     */
+    @Override
     public int hashCode() {
-        //TODO: WAT DIS?
-        return 1;
+        return Objects.hash(departmentName, persons);
     }
 
     /**
      * Removes a person from the department; be they employee or patient.
      * @param person the {@code Person} to be removed.
-     * @throws RemoveException
+     * @throws RemoveException if person is not in the hospital.
      */
     public void remove(Person person) throws RemoveException {
-        this.employees.remove(person.getSocialSecurityNumber());
-        this.patients.remove(person.getSocialSecurityNumber());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return o.getClass() == this.getClass() && o.toString().equals(toString());
+        if (this.persons.containsKey(person.getSocialSecurityNumber())) {
+            if (person instanceof Employee) {
+                if (persons.get(person.getSocialSecurityNumber()) instanceof Employee) {
+                    Employee p = (Employee) this.persons.get(person.getSocialSecurityNumber());
+                    this.persons.remove(p.getSocialSecurityNumber());
+                    throw new RemoveException("Fjernet " + p.asString() + " fra sykehusregisteret.");
+                }
+            } else if (person instanceof Patient) {
+                if (persons.get(person.getSocialSecurityNumber()) instanceof Patient) {
+                    Patient p = (Patient) this.persons.get(person.getSocialSecurityNumber());
+                    this.persons.remove(p.getSocialSecurityNumber());
+                    throw new RemoveException("Fjernet " + p.asString() + " fra sykehusregisteret.");
+                }
+            }
+        }
     }
 
     /**
@@ -114,8 +127,7 @@ public class Department {
      * employees and patients in the department.
      * @return {@code String} of the Department name, employees and patients.
      */
-    @Override
-    public String toString() {
+    public String getAsString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.departmentName).append("\nAnsatte: \n");
         for (Employee employee : getEmployees()) {
@@ -126,5 +138,19 @@ public class Department {
             sb.append(patient.toString()).append("\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        return this.departmentName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o.getClass() == this.getClass() && o.toString().equals(getAsString());
+    }
+
+    public List<Person> getPeople() {
+        return new ArrayList<>(this.persons.values());
     }
 }

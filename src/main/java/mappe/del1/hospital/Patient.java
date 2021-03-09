@@ -43,4 +43,7 @@ public class Patient extends Person implements Diagnosable{
         return super.toString();
     }
 
+    public String asString() {
+        return super.getFullName() + ", personnummer: "+ super.getSocialSecurityNumber();
+    }
 }

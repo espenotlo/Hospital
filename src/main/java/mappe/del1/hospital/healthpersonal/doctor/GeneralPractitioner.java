@@ -24,6 +24,10 @@ public class GeneralPractitioner extends Doctor {
 
     @Override
     public String toString() {
-        return "Allmenlege " + super.toString();
+        return "Allmennlege: " + super.getFullName() + ", personnummer: " + super.getSocialSecurityNumber();
+    }
+
+    public String asString() {
+        return "Allmennlege: " + super.getFullName() + ", personnummer: " + super.getSocialSecurityNumber();
     }
 }

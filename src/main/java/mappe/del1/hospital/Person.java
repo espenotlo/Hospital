@@ -87,6 +87,6 @@ public abstract class Person {
      */
     @Override
     public String toString() {
-        return (this.firstName + " " + this.lastName + ", personnummer: " + this.socialSecurityNumber);
+        return (getFullName() + ", personnummer: " + this.socialSecurityNumber);
     }
 }

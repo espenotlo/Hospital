@@ -26,6 +26,10 @@ public class Employee extends Person {
      */
     @Override
     public String toString() {
-        return super.toString();
+        return "Ansatt: " + super.getFullName() + ", personnummer: "+ super.getSocialSecurityNumber();
+    }
+
+    public String asString() {
+        return "Ansatt: " + super.getFullName() + ", personnummer: "+ super.getSocialSecurityNumber();
     }
 }

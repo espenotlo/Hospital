@@ -56,13 +56,18 @@ public class Hospital {
      * employees and patients in each department.
      * @return {@code String} of the Hospital name, departments and their employees and patients.
      */
-    @Override
-    public String toString() {
+    public String getAsString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.hospitalName).append("\n\n");
         for (Department department : getDepartments()) {
-            sb.append(department.toString()).append("\n");
+            sb.append(department.getAsString()).append("\n");
         }
         return sb.toString();
+    }
+
+
+    @Override
+    public String toString() {
+        return this.hospitalName;
     }
 }
